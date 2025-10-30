@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #0e0d26; -webkit-text-stroke: #0e0d26}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #0e0d26; -webkit-text-stroke: #0e0d26; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!-- static/index.html --&gt;</span></p>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="zh"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;AI健身计划生成器&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="container mx-auto px-4 py-12" x-data="app()"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h1 class="text-4xl font-bold text-center text-gray-800 mb-8"&gt;💪 你的AI健身教练&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;form @submit.prevent="generate" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto space-y-6"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- 表单字段 --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-2 gap-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;input type="number" placeholder="年龄" x-model="age" required class="border p-3 rounded"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;select x-model="gender" required class="border p-3 rounded"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;option value=""&gt;性别&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;option value="男"&gt;男&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;option value="女"&gt;女&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input type="number" placeholder="身高 (cm)" x-model="height" class="w-full border p-3 rounded"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input type="number" placeholder="体重 (kg)" x-model="weight" class="w-full border p-3 rounded"/&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;select x-model="goal" required class="w-full border p-3 rounded"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value=""&gt;健身目标&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="增肌"&gt;增肌&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="减脂"&gt;减脂&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="塑形"&gt;塑形&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="提升体能"&gt;提升体能&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/select&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;select x-model="experience" required class="w-full border p-3 rounded"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value=""&gt;经验水平&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="新手"&gt;新手&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="中级"&gt;中级&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;option value="高级"&gt;高级&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/select&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input type="number" placeholder="每周可用时间 (小时)" x-model="time_per_week" class="w-full border p-3 rounded"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input type="text" placeholder="训练偏好 (如：HIIT、力量、瑜伽等)" x-model="preference" class="w-full border p-3 rounded"/&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- 权重滑块 --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="space-y-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;label&gt;参考博主建议的程度: &lt;span x-text="weight"&gt;&lt;/span&gt;&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;input type="range" min="0.1" max="0.9" step="0.1" x-model="weight" class="w-full"/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>生成我的健身计划</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- 结果展示 --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div x-show="plan" class="mt-10 bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-2xl font-semibold text-gray-800 mb-4"&gt;你的个性化健身方案&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="whitespace-pre-line text-gray-700 leading-relaxed" x-text="plan"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function app() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>age: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>gender: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>height: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>weight: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>goal: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>experience: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>time_per_week: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>preference: '',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>weight: 0.7,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>plan: null,</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>async generate() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const response = await fetch('/generate', {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>method: 'POST',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>headers: { 'Content-Type': 'application/json' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>body: JSON.stringify({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>age: this.age,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>gender: this.gender,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>height: this.height,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>weight: this.weight,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>goal: this.goal,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>experience: this.experience,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>time_per_week: this.time_per_week,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>preference: this.preference,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>weight: this.weight</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>})</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const data = await response.json();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>this.plan = data.plan;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
